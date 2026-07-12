@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": "minecraft:bread",
+  "cookingtime": 100,
+  "experience": 0.2,
+  "result": {
+    "id": "hearth_and_harvest:toast"
+  }
+}

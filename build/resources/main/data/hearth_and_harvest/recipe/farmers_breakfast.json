@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:bowl",
+    "minecraft:egg",
+    "minecraft:baked_potato",
+    "hearth_and_harvest:tomato",
+    "hearth_and_harvest:toast"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:farmers_breakfast"
+  }
+}

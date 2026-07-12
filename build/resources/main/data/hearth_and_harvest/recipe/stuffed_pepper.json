@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "hearth_and_harvest:bell_pepper",
+    "hearth_and_harvest:rice",
+    "hearth_and_harvest:cheese"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:stuffed_pepper"
+  }
+}

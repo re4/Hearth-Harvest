@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:bowl",
+    "hearth_and_harvest:rice",
+    "minecraft:egg",
+    "hearth_and_harvest:onion",
+    "hearth_and_harvest:cooking_oil"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:fried_rice"
+  }
+}

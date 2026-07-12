@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:bowl",
+    "hearth_and_harvest:spinach",
+    "hearth_and_harvest:cucumber",
+    "hearth_and_harvest:tomato"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:garden_salad"
+  }
+}

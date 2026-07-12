@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:orange_dye"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:bell_pepper_seeds",
+    "count": 2
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:pink_dye"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:strawberry_seeds",
+    "count": 2
+  }
+}

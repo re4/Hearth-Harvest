@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:bone_meal"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:spinach_seeds",
+    "count": 2
+  }
+}

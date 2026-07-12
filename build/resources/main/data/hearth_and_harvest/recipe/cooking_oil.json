@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:sunflower",
+    "minecraft:glass_bottle"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:cooking_oil"
+  }
+}

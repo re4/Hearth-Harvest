@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:blue_dye"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:rice_seeds",
+    "count": 2
+  }
+}

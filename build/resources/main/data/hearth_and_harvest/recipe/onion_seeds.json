@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:white_dye"
+  ],
+  "result": {
+    "id": "hearth_and_harvest:onion_seeds",
+    "count": 2
+  }
+}
