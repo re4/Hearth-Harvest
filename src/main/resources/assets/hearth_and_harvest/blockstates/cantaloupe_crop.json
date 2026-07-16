@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage0"
+    },
+    "age=1": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage1"
+    },
+    "age=2": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage2"
+    },
+    "age=3": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage3"
+    },
+    "age=4": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage4"
+    },
+    "age=5": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage5"
+    },
+    "age=6": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage6"
+    },
+    "age=7": {
+      "model": "hearth_and_harvest:block/cantaloupe_stage7"
+    }
+  }
+}

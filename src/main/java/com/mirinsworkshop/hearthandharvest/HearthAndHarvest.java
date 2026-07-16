@@ -12,6 +12,7 @@ public final class HearthAndHarvest implements ModInitializer {
     public void onInitialize() {
         ModBlocks.initialize();
         ModItems.initialize();
+        ModExpandedCrops.initialize();
         ModItemGroups.initialize();
         ModGrassDrops.initialize();
         LOGGER.info("Hearth & Harvest has set the table.");

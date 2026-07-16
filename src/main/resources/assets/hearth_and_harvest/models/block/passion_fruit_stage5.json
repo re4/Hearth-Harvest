@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "hearth_and_harvest:block/passion_fruit_stage5"
+  }
+}

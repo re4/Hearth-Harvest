@@ -1,0 +1,129 @@
+com.mirinsworkshop.hearthandharvest.HarvestCropBlock -> com.mirinsworkshop.hearthandharvest.a:
+# {"fileName":"HarvestCropBlock.java","id":"sourceFile"}
+    java.util.function.Supplier seeds -> a
+    12:14:void <init>(net.minecraft.world.level.block.state.BlockBehaviour$Properties,java.util.function.Supplier) -> <init>
+    18:18:net.minecraft.world.item.Item getBaseSeedId() -> a
+    8:8:net.minecraft.world.level.ItemLike getBaseSeedId() -> getBaseSeedId
+com.mirinsworkshop.hearthandharvest.HearthAndHarvest -> com.mirinsworkshop.hearthandharvest.HearthAndHarvest:
+# {"fileName":"HearthAndHarvest.java","id":"sourceFile"}
+    java.lang.String MOD_ID -> b
+    org.slf4j.Logger LOGGER -> c
+    7:7:void <init>() -> <init>
+    13:19:void onInitialize() -> onInitialize
+    9:9:void <clinit>() -> <clinit>
+com.mirinsworkshop.hearthandharvest.ModBlocks -> com.mirinsworkshop.hearthandharvest.b:
+# {"fileName":"ModBlocks.java","id":"sourceFile"}
+    java.util.Map CROPS -> d
+    net.minecraft.world.level.block.Block TOMATO_CROP -> e
+    net.minecraft.world.level.block.Block ONION_CROP -> f
+    net.minecraft.world.level.block.Block CUCUMBER_CROP -> g
+    net.minecraft.world.level.block.Block CORN_CROP -> h
+    net.minecraft.world.level.block.Block BELL_PEPPER_CROP -> i
+    net.minecraft.world.level.block.Block STRAWBERRY_CROP -> j
+    net.minecraft.world.level.block.Block RICE_CROP -> k
+    net.minecraft.world.level.block.Block SPINACH_CROP -> l
+    net.minecraft.world.level.block.Block CUTTING_BOARD -> m
+    net.minecraft.world.level.block.Block COOKING_POT -> n
+    net.minecraft.world.level.block.Block MARKET_CRATE -> o
+    36:39:net.minecraft.world.level.block.Block registerCrop(java.lang.String,java.util.function.Supplier) -> a
+    44:47:net.minecraft.world.level.block.Block register(java.lang.String,java.util.function.Function,net.minecraft.world.level.block.state.BlockBehaviour$Properties) -> a
+    50:50:void initialize() -> b
+    52:52:void <init>() -> <init>
+    36:36:net.minecraft.world.level.block.Block lambda$registerCrop$0(java.util.function.Supplier,net.minecraft.world.level.block.state.BlockBehaviour$Properties) -> a
+    32:32:net.minecraft.world.level.block.Block lambda$static$10(net.minecraft.world.level.block.state.BlockBehaviour$Properties) -> a
+    30:30:net.minecraft.world.level.block.Block lambda$static$9(net.minecraft.world.level.block.state.BlockBehaviour$Properties) -> b
+    28:28:net.minecraft.world.level.block.Block lambda$static$8(net.minecraft.world.level.block.state.BlockBehaviour$Properties) -> c
+    26:26:net.minecraft.world.item.Item lambda$static$7() -> c
+    25:25:net.minecraft.world.item.Item lambda$static$6() -> d
+    24:24:net.minecraft.world.item.Item lambda$static$5() -> e
+    23:23:net.minecraft.world.item.Item lambda$static$4() -> f
+    22:22:net.minecraft.world.item.Item lambda$static$3() -> g
+    21:21:net.minecraft.world.item.Item lambda$static$2() -> h
+    20:20:net.minecraft.world.item.Item lambda$static$1() -> i
+    19:19:net.minecraft.world.item.Item lambda$static$0() -> j
+    17:33:void <clinit>() -> <clinit>
+com.mirinsworkshop.hearthandharvest.ModExpandedCrops -> com.mirinsworkshop.hearthandharvest.c:
+# {"fileName":"ModExpandedCrops.java","id":"sourceFile"}
+    java.lang.String[] NAMES -> p
+    java.util.List ENTRIES -> q
+    29:39:void initialize() -> b
+    42:42:java.util.List entries() -> k
+    46:46:java.util.List seedItems() -> l
+    50:53:int nutrition(java.lang.String) -> a
+    58:61:float saturation(java.lang.String) -> b
+    65:65:void <init>() -> <init>
+    32:32:net.minecraft.world.item.Item lambda$initialize$0(net.minecraft.world.item.Item[]) -> a
+    14:26:void <clinit>() -> <clinit>
+com.mirinsworkshop.hearthandharvest.ModExpandedCrops$CropEntry -> com.mirinsworkshop.hearthandharvest.c$a:
+# {"fileName":"ModExpandedCrops.java","id":"sourceFile"}
+    java.lang.String name -> r
+    net.minecraft.world.item.Item produce -> s
+    net.minecraft.world.item.Item seeds -> t
+    net.minecraft.world.level.block.Block crop -> u
+    12:12:void <init>(java.lang.String,net.minecraft.world.item.Item,net.minecraft.world.item.Item,net.minecraft.world.level.block.Block) -> <init>
+    12:12:java.lang.String toString() -> toString
+    12:12:int hashCode() -> hashCode
+    12:12:boolean equals(java.lang.Object) -> equals
+    12:12:java.lang.String name() -> m
+    12:12:net.minecraft.world.item.Item produce() -> n
+    12:12:net.minecraft.world.item.Item seeds() -> o
+    12:12:net.minecraft.world.level.block.Block crop() -> p
+com.mirinsworkshop.hearthandharvest.ModGrassDrops -> com.mirinsworkshop.hearthandharvest.d:
+# {"fileName":"ModGrassDrops.java","id":"sourceFile"}
+    float SEED_CHANCE -> v
+    17:43:void initialize() -> b
+    45:45:void <init>() -> <init>
+    30:42:void lambda$initialize$0(java.util.List,net.minecraft.world.level.Level,net.minecraft.world.entity.player.Player,net.minecraft.core.BlockPos,net.minecraft.world.level.block.state.BlockState,net.minecraft.world.level.block.entity.BlockEntity) -> a
+com.mirinsworkshop.hearthandharvest.ModItemGroups -> com.mirinsworkshop.hearthandharvest.e:
+# {"fileName":"ModItemGroups.java","id":"sourceFile"}
+    net.minecraft.world.item.CreativeModeTab MAIN -> w
+    22:22:void initialize() -> b
+    24:24:void <init>() -> <init>
+    18:18:void lambda$static$1(net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters,net.minecraft.world.item.CreativeModeTab$Output) -> a
+    16:16:net.minecraft.world.item.ItemStack lambda$static$0() -> q
+    12:19:void <clinit>() -> <clinit>
+com.mirinsworkshop.hearthandharvest.ModItems -> com.mirinsworkshop.hearthandharvest.f:
+# {"fileName":"ModItems.java","id":"sourceFile"}
+    java.util.Map ALL -> x
+    net.minecraft.world.item.Item TOMATO -> y
+    net.minecraft.world.item.Item ONION -> z
+    net.minecraft.world.item.Item CUCUMBER -> A
+    net.minecraft.world.item.Item CORN -> B
+    net.minecraft.world.item.Item BELL_PEPPER -> C
+    net.minecraft.world.item.Item STRAWBERRY -> D
+    net.minecraft.world.item.Item RICE -> E
+    net.minecraft.world.item.Item SPINACH -> F
+    net.minecraft.world.item.Item TOMATO_SEEDS -> G
+    net.minecraft.world.item.Item ONION_SEEDS -> H
+    net.minecraft.world.item.Item CUCUMBER_SEEDS -> I
+    net.minecraft.world.item.Item CORN_SEEDS -> J
+    net.minecraft.world.item.Item BELL_PEPPER_SEEDS -> K
+    net.minecraft.world.item.Item STRAWBERRY_SEEDS -> L
+    net.minecraft.world.item.Item RICE_SEEDS -> M
+    net.minecraft.world.item.Item SPINACH_SEEDS -> N
+    net.minecraft.world.item.Item FLOUR -> O
+    net.minecraft.world.item.Item COOKING_OIL -> P
+    net.minecraft.world.item.Item DOUGH -> Q
+    net.minecraft.world.item.Item CHEESE -> R
+    net.minecraft.world.item.Item TOAST -> S
+    net.minecraft.world.item.Item GRILLED_CHEESE -> T
+    net.minecraft.world.item.Item GARDEN_SALAD -> U
+    net.minecraft.world.item.Item TOMATO_SOUP -> V
+    net.minecraft.world.item.Item VEGGIE_STEW -> W
+    net.minecraft.world.item.Item STUFFED_PEPPER -> X
+    net.minecraft.world.item.Item STRAWBERRY_TART -> Y
+    net.minecraft.world.item.Item CORN_CHOWDER -> Z
+    net.minecraft.world.item.Item FRIED_RICE -> aa
+    net.minecraft.world.item.Item FARMERS_BREAKFAST -> ab
+    net.minecraft.world.item.Item CUTTING_BOARD -> ac
+    net.minecraft.world.item.Item COOKING_POT -> ad
+    net.minecraft.world.item.Item MARKET_CRATE -> ae
+    58:59:net.minecraft.world.item.Item registerFood(java.lang.String,int,float) -> a
+    63:63:net.minecraft.world.item.Item registerSeeds(java.lang.String,net.minecraft.world.level.block.Block) -> a
+    67:67:net.minecraft.world.item.Item blockItem(java.lang.String,net.minecraft.world.level.block.Block) -> b
+    71:75:net.minecraft.world.item.Item register(java.lang.String,java.util.function.Function,net.minecraft.world.item.Item$Properties) -> a
+    78:78:void initialize() -> b
+    80:80:void <init>() -> <init>
+    67:67:net.minecraft.world.item.Item lambda$blockItem$0(net.minecraft.world.level.block.Block,net.minecraft.world.item.Item$Properties) -> a
+    63:63:net.minecraft.world.item.Item lambda$registerSeeds$0(net.minecraft.world.level.block.Block,net.minecraft.world.item.Item$Properties) -> b
+    18:55:void <clinit>() -> <clinit>

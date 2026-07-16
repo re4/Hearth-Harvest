@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Adds a small server-side chance for broken grass to yield one random crop seed. */
@@ -13,7 +14,7 @@ public final class ModGrassDrops {
     private static final float SEED_CHANCE = 0.08F;
 
     public static void initialize() {
-        List<Item> seeds = List.of(
+        List<Item> seeds = new ArrayList<>(List.of(
                 ModItems.TOMATO_SEEDS,
                 ModItems.ONION_SEEDS,
                 ModItems.CUCUMBER_SEEDS,
@@ -22,7 +23,8 @@ public final class ModGrassDrops {
                 ModItems.STRAWBERRY_SEEDS,
                 ModItems.RICE_SEEDS,
                 ModItems.SPINACH_SEEDS
-        );
+        ));
+        seeds.addAll(ModExpandedCrops.seedItems());
 
         PlayerBlockBreakEvents.AFTER.register((level, player, pos, state, blockEntity) -> {
             if (level.isClientSide() || player.isCreative()) {

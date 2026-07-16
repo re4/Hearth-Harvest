@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "hearth_and_harvest:block/asparagus_stage1"
+  }
+}
