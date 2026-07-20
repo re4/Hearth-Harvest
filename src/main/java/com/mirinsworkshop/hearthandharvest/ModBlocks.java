@@ -25,10 +25,10 @@ public final class ModBlocks {
     public static final Block RICE_CROP = registerCrop("rice", () -> ModItems.RICE_SEEDS);
     public static final Block SPINACH_CROP = registerCrop("spinach", () -> ModItems.SPINACH_SEEDS);
 
-    public static final Block CUTTING_BOARD = register("cutting_board", props -> new Block(props),
-            BlockBehaviour.Properties.of().strength(1.2F).sound(SoundType.WOOD));
-    public static final Block COOKING_POT = register("cooking_pot", props -> new Block(props),
-            BlockBehaviour.Properties.of().strength(1.8F).sound(SoundType.METAL));
+    public static final Block CUTTING_BOARD = register("cutting_board", CuttingBoardBlock::new,
+            BlockBehaviour.Properties.of().noOcclusion().strength(1.2F).sound(SoundType.WOOD));
+    public static final Block COOKING_POT = register("cooking_pot", CookingPotBlock::new,
+            BlockBehaviour.Properties.of().noOcclusion().strength(1.8F).sound(SoundType.METAL));
     public static final Block MARKET_CRATE = register("market_crate", props -> new Block(props),
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
 

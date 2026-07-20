@@ -11,7 +11,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).parents[1]
-JAR = ROOT / "build/libs/hearth-and-harvest-1.1.0.jar"
+JAR = ROOT / "build/libs/hearth-and-harvest-1.1.1.jar"
 
 
 def assigned_list(path: Path, variable: str) -> list[str]:
@@ -47,6 +47,75 @@ def component_sizes(texture: Image.Image) -> list[int]:
                         pending.append(neighbor)
         components.append(len(component))
     return sorted(components, reverse=True)
+
+
+def property_value(name: str) -> str:
+    for line in (ROOT / "gradle.properties").read_text(encoding="utf-8").splitlines():
+        key, separator, value = line.partition("=")
+        if separator and key.strip() == name:
+            return value.strip()
+    raise RuntimeError(f"Missing Gradle property: {name}")
+
+
+def ingredient_signature(ingredient: object) -> str:
+    return json.dumps(ingredient, sort_keys=True, separators=(",", ":"))
+
+
+def recipe_signature(recipe: dict[str, object]) -> str | None:
+    recipe_type = recipe.get("type")
+    if recipe_type == "minecraft:crafting_shapeless":
+        ingredients = sorted(ingredient_signature(value) for value in recipe["ingredients"])
+        return f"{recipe_type}|{'+'.join(ingredients)}"
+    if recipe_type == "minecraft:crafting_shaped":
+        key = recipe["key"]
+        rows = tuple(
+            tuple("_" if symbol == " " else ingredient_signature(key[symbol]) for symbol in row)
+            for row in recipe["pattern"]
+        )
+        mirrored_rows = tuple(tuple(reversed(row)) for row in rows)
+        variants = sorted(ingredient_signature(value) for value in (rows, mirrored_rows))
+        return f"{recipe_type}|{variants[0]}"
+    if recipe_type in {
+        "minecraft:smelting",
+        "minecraft:blasting",
+        "minecraft:smoking",
+        "minecraft:campfire_cooking",
+    }:
+        return f"{recipe_type}|{ingredient_signature(recipe['ingredient'])}"
+    return None
+
+
+def vanilla_recipe_collisions(mod_archive: zipfile.ZipFile) -> tuple[list[tuple[str, str]], int]:
+    minecraft_version = property_value("minecraft_version")
+    vanilla_jars = sorted(
+        (ROOT / ".gradle/loom-cache/minecraftMaven/net/minecraft").glob(
+            f"minecraft-merged-*/{minecraft_version}/*.jar"
+        )
+    )
+    if not vanilla_jars:
+        raise RuntimeError(f"Minecraft {minecraft_version} merged jar is unavailable")
+
+    vanilla_signatures: dict[str, list[str]] = {}
+    with zipfile.ZipFile(vanilla_jars[-1]) as vanilla_archive:
+        for path in vanilla_archive.namelist():
+            if not path.startswith("data/minecraft/recipe/") or not path.endswith(".json"):
+                continue
+            signature = recipe_signature(json.loads(vanilla_archive.read(path)))
+            if signature is not None:
+                vanilla_signatures.setdefault(signature, []).append(Path(path).stem)
+
+    collisions = []
+    mod_recipe_count = 0
+    for path in mod_archive.namelist():
+        if not path.startswith("data/hearth_and_harvest/recipe/") or not path.endswith(".json"):
+            continue
+        mod_recipe_count += 1
+        signature = recipe_signature(json.loads(mod_archive.read(path)))
+        if signature is None:
+            continue
+        for vanilla_name in vanilla_signatures.get(signature, []):
+            collisions.append((Path(path).stem, vanilla_name))
+    return collisions, mod_recipe_count
 
 
 def expected_seed_label(crop_icon: Image.Image) -> Image.Image:
@@ -107,6 +176,7 @@ with zipfile.ZipFile(JAR) as archive:
     fragmented_food_tools = []
     dark_chroma_edges = []
     seed_packet_problems = []
+    recipe_collisions, recipe_count = vanilla_recipe_collisions(archive)
     for name in padded_names:
         data = archive.read(f"assets/hearth_and_harvest/textures/item/{name}.png")
         texture = Image.open(io.BytesIO(data)).convert("RGBA")
@@ -156,7 +226,7 @@ with zipfile.ZipFile(JAR) as archive:
         if actual_label.tobytes() != expected_label.tobytes():
             seed_packet_problems.append((name, "wrong or missing crop icon"))
 
-assert metadata["version"] == "1.1.0", metadata["version"]
+assert metadata["version"] == "1.1.1", metadata["version"]
 assert not edge_touching, edge_touching
 assert not oversized_sprites, oversized_sprites
 assert not off_center_sprites, off_center_sprites
@@ -164,6 +234,7 @@ assert not fragmented_food_tools, fragmented_food_tools
 assert not dark_chroma_edges, dark_chroma_edges
 assert not seed_packet_problems, seed_packet_problems
 assert not texture_problems, texture_problems
+assert not recipe_collisions, recipe_collisions
 assert "com/mirinsworkshop/hearthandharvest/HearthAndHarvest.class" in archive_names
 assert "com/mirinsworkshop/hearthandharvest/ModItems.class" not in archive_names
 assert "com/mirinsworkshop/hearthandharvest/a.class" in archive_names
@@ -173,5 +244,6 @@ print(
     f"padded_item_sprites_checked={len(padded_names)} all_item_textures=16x16-rgba "
     f"edge_touching=0 max_nonseed_extent=12 centered=verified "
     f"food_tools=connected seed_packet_icons={len(seed_crop_names)} chroma_residue=0 json=valid "
+    f"recipes_checked={recipe_count} vanilla_recipe_collisions=0 "
     f"proguard=verified jar_bytes={JAR.stat().st_size}"
 )

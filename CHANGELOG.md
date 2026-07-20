@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1
+
+- Reworked the cooking pot recipe so it no longer conflicts with the vanilla bucket recipe.
+- Reworked the market crate recipe so it no longer conflicts with the vanilla chest recipe.
+- Verified all 25 Hearth & Harvest recipes against Minecraft 26.2.
+- Matched the cutting board selection and collision shape to its thin block model.
+- Prevented the cutting board outline from appearing through neighboring walls.
+- Disabled full-block occlusion for correct wall faces and lighting around the board.
+- Matched the cooking pot outline and collision to its body and handles.
+
 ## 1.1.0
 
 - Added the matching miniature crop icon to every one of the 67 seed packets.

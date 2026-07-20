@@ -1,0 +1,105 @@
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'com.guardsquare:proguard-gradle:7.9.1' }
+}
+
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base { archivesName = project.archive_base_name }
+
+loom {
+    mods {
+        "hearth_and_harvest" { sourceSet sourceSets.main }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") { expand "version": project.version }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+}
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(25) }
+    withSourcesJar()
+}
+
+jar {
+    archiveClassifier.set("dev")
+    from("LICENSE") { rename { "${it}_${project.name}" } }
+}
+
+def protectedJar = layout.buildDirectory.file(
+        "libs/${project.archive_base_name}-${project.version}.jar")
+
+tasks.register("proguardJar", proguard.gradle.ProGuardTask) {
+    group = "build"
+    description = "Obfuscates the release mod jar with ProGuard."
+    dependsOn tasks.named("jar")
+
+    injars tasks.named("jar", Jar).flatMap { it.archiveFile }
+    outjars protectedJar
+    libraryjars configurations.compileClasspath
+    libraryjars files(fileTree(dir: "${System.getProperty('java.home')}/jmods", include: "*.jmod")),
+            filter: "!module-info.class"
+    configuration file("proguard.pro")
+
+    doFirst {
+        layout.buildDirectory.dir("proguard").get().asFile.mkdirs()
+    }
+}
+
+tasks.named("assemble") {
+    dependsOn tasks.named("proguardJar")
+}
+
+tasks.register("runProguardServer", JavaExec) {
+    group = "fabric"
+    description = "Launches a dedicated server using the exact ProGuard release jar."
+    dependsOn tasks.named("proguardJar")
+
+    classpath = configurations.runtimeClasspath + files(protectedJar)
+    mainClass.set("net.fabricmc.loader.impl.launch.knot.KnotServer")
+    workingDir layout.buildDirectory.dir("proguard-server")
+    args "nogui"
+    standardInput = System.in
+
+    doFirst {
+        def acceptedEula = file("run/eula.txt")
+        if (!acceptedEula.isFile() || !acceptedEula.text.contains("eula=true")) {
+            throw new GradleException("Accept the Minecraft EULA in run/eula.txt before running this task.")
+        }
+        def serverDir = layout.buildDirectory.dir("proguard-server").get().asFile
+        serverDir.mkdirs()
+        copy {
+            from acceptedEula
+            into serverDir
+        }
+        def releasePath = protectedJar.get().asFile.absolutePath
+        systemProperty "fabric.development", "true"
+        systemProperty "fabric.classPathGroups", releasePath
+        systemProperty "fabric.addMods", releasePath
+        systemProperty "fabric.defaultModDistributionNamespace", "official"
+        systemProperty "fabric.defaultMixinRemapType", "static"
+        systemProperty "log4j.configurationFile", file(".gradle/loom-cache/log4j.xml").absolutePath
+    }
+}
+
+publishing {
+    publications { create("mavenJava", MavenPublication) { from components.java } }
+}
